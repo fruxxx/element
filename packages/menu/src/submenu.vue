@@ -42,6 +42,10 @@
         type: Number,
         default: 300
       },
+      arrows: {
+        type: String,
+        default: "right"
+      },
       popperClass: String
     },
 
@@ -273,6 +277,12 @@
           on-mouseleave={this.handleMouseleave}
           on-focus={this.handleMouseenter}
         >
+          <i v-if='arrows=="left"' class={{
+            'el-submenu__icon-arrow': true,
+            'el-icon-arrow-down': rootMenu.mode === 'horizontal' || rootMenu.mode === 'vertical' && !rootMenu.collapse,
+            'el-icon-arrow-right': rootMenu.mode === 'vertical' && rootMenu.collapse
+          }}>
+          </i>
           <div
             class="el-submenu__title"
             ref="submenu-title"
@@ -282,7 +292,8 @@
             style={[paddingStyle, titleStyle, { backgroundColor }]}
           >
             {$slots.title}
-            <i class={{
+            
+            <i v-if='arrows=="right"' class={{
               'el-submenu__icon-arrow': true,
               'el-icon-arrow-down': rootMenu.mode === 'horizontal' || rootMenu.mode === 'vertical' && !rootMenu.collapse,
               'el-icon-arrow-right': rootMenu.mode === 'vertical' && rootMenu.collapse
